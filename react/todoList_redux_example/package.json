@@ -1,0 +1,69 @@
+{
+  "name": "manager",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.2.1",
+    "@nivo/bar": "^0.61.1",
+    "@nivo/line": "^0.61.1",
+    "@nivo/pie": "^0.61.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.3.4",
+    "axios": "^0.19.1",
+    "classnames": "^2.2.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "firebase": "^7.14.5",
+    "moment": "^2.24.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start-prod": "REACT_APP_DEPLOY_TYPE=production react-scripts start",
+    "build-dev": "REACT_APP_DEPLOY_TYPE=development npm run build",
+    "build": "react-scripts build",
+    "build-prod": "REACT_APP_DEPLOY_TYPE=production react-scripts build",
+    "start-dev-windows": "npm run start-windows",
+    "start-prod-windows": "set \"REACT_APP_DEPLOY_TYPE=production\" && react-scripts start",
+    "build-windows": "set \"REACT_APP_DEPLOY_TYPE=productuion\" && react-scripts build",
+    "build-dev-windows": "set \"REACT_APP_DEPLOY_TYPE=development\" && react-scripts build",
+    "build-prod-windows": "npm run build-windows",
+    "test": "REACT_APP_DEPLOY_TYPE=development react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://freshntech-freshm-manager-release --profile=ongdv",
+    "invalidation": "aws cloudfront create-invalidation --profile=ongdv --distribution-id E2XFSYOTB2Y6FO --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.icon /static /static/media /static/js /static/css /favicon.png",
+    "release": "npm run build-prod && npm run deploy && npm run invalidation"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

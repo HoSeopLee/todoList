@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.todoList.todo.TodoRepository">
+    <select id="getTodoList" resultType="com.example.todoList.todo.TodoModel">
+        SELECT
+            id,
+            title,
+            state
+        FROM
+            todoList
+    </select>
+    <insert id="insertTodoList" parameterType="com.example.todoList.todo.TodoModel">
+        INSERT
+        INTO
+            todoList(title)
+        VALUES( #{title});
+    </insert>
+    <update id="updateTodoList" parameterType="com.example.todoList.todo.TodoModel">
+        UPDATE
+            todoList
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">
+                title = #{title}
+            </if>
+            <if test="state != null">
+                state = #{state}
+            </if>
+        </trim>
+        WHERE
+         id=#{id}
+    </update>
+    <delete id="deleteTodoList" parameterType="int">
+        DELETE
+        FROM todoList
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
